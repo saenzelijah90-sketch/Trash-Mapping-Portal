@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Public photo reporting and environmental mapping portal">
+  <title>Trash & Damage Mapping Portal</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-mark">TM</div>
+    <div>
+      <p class="eyebrow">COMMUNITY ENVIRONMENTAL REPORTING</p>
+      <h1>Trash & Damage Mapping Portal</h1>
+    </div>
+    <span class="public-pill">Public reporting</span>
+  </header>
+
+  <main class="page">
+    <section class="intro-grid">
+      <div class="intro-copy">
+        <p class="eyebrow">REPORT · DOCUMENT · MAP</p>
+        <h2>Help identify where cleanup and repairs are needed.</h2>
+        <p>Upload photographs of litter, dumping, or road damage. The portal reads location data embedded in each original photo and maps reports when GPS metadata is available.</p>
+      </div>
+      <div class="intro-note">
+        <strong>Photo location matters</strong>
+        <p>For the most accurate map pin, upload the original photo from your camera. Social-media downloads, screenshots, and edited copies may have GPS metadata removed.</p>
+      </div>
+    </section>
+
+    <section class="panel upload-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">NEW SUBMISSION</p>
+          <h2>Upload photographs</h2>
+        </div>
+        <span class="step-number">01</span>
+      </div>
+      <label class="drop-zone" for="photo-files">
+        <span class="upload-icon">↑</span>
+        <strong>Choose one or more photographs</strong>
+        <span>JPG, JPEG, PNG, TIFF or other supported image formats · maximum 15 MB each</span>
+        <input id="photo-files" type="file" accept="image/*" multiple>
+      </label>
+      <div id="selected-files" class="selected-files" aria-live="polite">No photographs selected.</div>
+      <div class="upload-actions">
+        <button id="upload-button" class="primary-button" type="button">Upload reports</button>
+        <p class="privacy-note">Do not upload photos containing private or sensitive information. Uploaded images are stored in Google Drive and are currently viewable by anyone with the image link.</p>
+      </div>
+      <div id="upload-status" class="status" role="status" aria-live="polite"></div>
+      <div id="upload-results" class="result-list"></div>
+    </section>
+
+    <section class="stats-grid" aria-label="Submission summary">
+      <article class="stat-card"><span>Total raw reports</span><strong id="raw-count">—</strong></article>
+      <article class="stat-card"><span>Reports with GPS</span><strong id="gps-count">—</strong></article>
+      <article class="stat-card"><span>Pending analysis</span><strong id="pending-count">—</strong></article>
+    </section>
+
+    <section class="panel map-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">ALL SUBMISSIONS</p>
+          <h2>Raw report map</h2>
+          <p class="section-description">Red markers show uploaded photographs with valid embedded GPS coordinates.</p>
+        </div>
+        <span class="map-legend red"><i></i> Raw</span>
+      </div>
+      <div id="raw-map" class="map"></div>
+      <p class="map-footnote">Photos without GPS metadata remain in the spreadsheet but cannot be accurately pinned automatically.</p>
+    </section>
+
+    <section class="panel map-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">ANALYSIS WORKFLOW</p>
+          <h2>Processed results map</h2>
+          <p class="section-description">Green markers represent records in the processed worksheet. Until a YOLO model is added, new records remain marked as pending.</p>
+        </div>
+        <span class="map-legend green"><i></i> Processed worksheet</span>
+      </div>
+      <div id="processed-map" class="map"></div>
+    </section>
+
+    <footer>
+      <span>Trash & Damage Mapping Portal</span>
+      <span>Map data © OpenStreetMap contributors</span>
+    </footer>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
